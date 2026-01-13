@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "GameHub",
+    "slug": "gamehub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#1a1a2e"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gamehub.app"
+    },
+    "android": {
+      "package": "com.gamehub.app"
+    },
+    "web": {},
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
