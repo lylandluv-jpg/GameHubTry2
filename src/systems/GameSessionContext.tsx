@@ -9,10 +9,12 @@ interface GameSessionContextType {
   session: GameSession | null;
   selectedGameId: string | null;
   selectedMode: Mode | null;
+  selectedCategories: string[];
   
   setSession: (session: GameSession | null) => void;
   setSelectedGameId: (gameId: string | null) => void;
   setSelectedMode: (mode: Mode | null) => void;
+  setSelectedCategories: (categories: string[]) => void;
   
   addPlayer: (name: string) => void;
   removePlayer: (playerId: string) => void;
@@ -28,6 +30,7 @@ export const GameSessionProvider: React.FC<{ children: ReactNode }> = ({ childre
   const [session, setSession] = useState<GameSession | null>(null);
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const [selectedMode, setSelectedMode] = useState<Mode | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const addPlayer = (name: string) => {
     const newPlayer = PlayerSystem.createPlayer(name);
@@ -84,6 +87,7 @@ export const GameSessionProvider: React.FC<{ children: ReactNode }> = ({ childre
     setSession(null);
     setSelectedGameId(null);
     setSelectedMode(null);
+    setSelectedCategories([]);
   };
 
   return (
@@ -92,9 +96,11 @@ export const GameSessionProvider: React.FC<{ children: ReactNode }> = ({ childre
         session,
         selectedGameId,
         selectedMode,
+        selectedCategories,
         setSession,
         setSelectedGameId,
         setSelectedMode,
+        setSelectedCategories,
         addPlayer,
         removePlayer,
         updatePlayerScore,

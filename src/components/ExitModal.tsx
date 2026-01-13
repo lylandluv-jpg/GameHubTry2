@@ -59,29 +59,42 @@ const ExitModal: React.FC<ExitModalProps> = ({
       transparent
       animationType="none"
       onRequestClose={onCancel}
+      statusBarTranslucent
     >
-      <Pressable onPress={onCancel}>
-        <AnimatedView style={[styles.overlay, fadeStyle, modalStyle]}>
-          <View style={styles.container} onStartShouldSetResponder={() => true}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.message}>{message}</Text>
-              <View style={styles.buttonContainer}>
-                <AnimatedButton
-                  title="Cancel"
-                  onPress={onCancel}
-                  variant="secondary"
-                  style={styles.button}
-                />
-                <AnimatedButton
-                  title="Exit"
-                  onPress={onConfirm}
-                  variant="danger"
-                  style={styles.button}
-                />
-              </View>
+      <AnimatedView style={[styles.overlay, fadeStyle]}>
+        <Pressable 
+          style={styles.overlayPressable}
+          onPress={onCancel}
+        >
+          <View style={styles.overlaySpacer} />
+        </Pressable>
+        <AnimatedView style={[styles.modalContent, modalStyle]}>
+          <View style={styles.container}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.message}>{message}</Text>
+            <View style={styles.buttonContainer}>
+              <AnimatedButton
+                title="Cancel"
+                onPress={onCancel}
+                variant="secondary"
+                style={styles.button}
+              />
+              <AnimatedButton
+                title="Exit"
+                onPress={onConfirm}
+                variant="danger"
+                style={styles.button}
+              />
+            </View>
           </View>
         </AnimatedView>
-      </Pressable>
+        <Pressable 
+          style={styles.overlayPressable}
+          onPress={onCancel}
+        >
+          <View style={styles.overlaySpacer} />
+        </Pressable>
+      </AnimatedView>
     </Modal>
   );
 };
@@ -91,15 +104,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.overlay,
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing.xl
+    alignItems: 'center'
+  },
+  overlayPressable: {
+    flex: 1,
+    width: '100%'
+  },
+  overlaySpacer: {
+    flex: 1
+  },
+  modalContent: {
+    width: '100%',
+    maxWidth: 400,
+    paddingHorizontal: theme.spacing.xl,
+    zIndex: 1000
   },
   container: {
     backgroundColor: theme.colors.card,
     borderRadius: theme.borderRadius.lg,
     padding: theme.spacing.xl,
     width: '100%',
-    maxWidth: 400,
     ...theme.shadows.lg
   },
   title: {

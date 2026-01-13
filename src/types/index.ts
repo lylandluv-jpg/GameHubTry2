@@ -71,6 +71,30 @@ export interface WouldYouRatherContent {
   optionB: string;
 }
 
+export interface FuckMarryKillCard {
+  id: number;
+  groupTitle: string;
+  names: string[];
+  intensity: number;
+  gradient: [string, string, string];
+  categoryId: string;
+}
+
+export interface TrueFalseTriviaContent {
+  id: string;
+  statement: string;
+  isTrue: boolean;
+  explanation: string;
+  category: string;
+}
+
+export interface WhatIfContent {
+  id: string;
+  question: string;
+  subtext: string;
+  mode: string;
+}
+
 // Navigation types
 export type RootStackParamList = {
   Dashboard: undefined;
@@ -84,4 +108,4 @@ export type RootStackParamList = {
   ResultScreen: { gameId: string };
 };
 
-export type GameId = 'truth_or_dare' | 'never_have_i_ever' | 'would_you_rather' | 'simple_truth_or_dare' | 'simple_would_you_rather';
+export type GameId = 'truth_or_dare' | 'never_have_i_ever' | 'would_you_rather' | 'simple_truth_or_dare' | 'simple_would_you_rather' | 'fuck_marry_kill' | 'true_false_trivia' | 'what_if' | 'truth_or_drink' | 'kings_cup';

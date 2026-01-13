@@ -156,6 +156,156 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
+  },
+  {
+    id: 'fuck_marry_kill',
+    name: 'Fuck Marry Kill',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#FF6B6B' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#FF6B6B' }
+    ],
+    rules: [
+      'Read the three names on the card',
+      'Decide: F*** (one night), Marry (forever), Kill (eliminate)',
+      'Swipe the card to move to the next round',
+      'Be honest with your choices',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'true_false_trivia',
+    name: 'True False Trivia',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#4ECDC4' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#4ECDC4' }
+    ],
+    rules: [
+      'Read the statement on the card',
+      'Tap the card to reveal if it\'s True or False',
+      'Read the explanation to learn more',
+      'Swipe the card to move to the next question',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'what_if',
+    name: 'What if',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#6366F1' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#6366F1' }
+    ],
+    rules: [
+      'Tap the card to reveal the question',
+      'Discuss the scenario with your group',
+      'Vote when ready or wait for timer',
+      'Minority group must explain their choice',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'truth_or_drink',
+    name: 'Truth or Drink',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#DC2626' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#DC2626' }
+    ],
+    rules: [
+      'Tap the card to reveal the truth question',
+      'Answer honestly or take a drink',
+      'You have 30 seconds to answer',
+      'Skip means you must drink',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'kings_cup',
+    name: "King's Cup",
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#BE123C' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#BE123C' }
+    ],
+    rules: [
+      'Each card has a rule that everyone must follow',
+      'Tap the card to reveal the rule',
+      'Swipe the card to move to the next card',
+      'Follow the rule immediately',
+      'The last King card drawn must drink the cup!',
+      'Game continues until all cards are drawn'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'kiss_game',
+    name: 'Kiss game',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#E11D48' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#E11D48' }
+    ],
+    rules: [
+      'Spin the wheel to select a kissing game',
+      'Follow the rules for the selected game',
+      'Have fun and respect boundaries',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
   }
 ];
 
@@ -185,6 +335,33 @@ export default function DashboardScreen() {
       router.push('/simple-truth-or-dare' as any);
     } else if (gameId === 'simple_would_you_rather') {
       router.push('/simple-would-you-rather' as any);
+    } else if (gameId === 'truth_or_dare') {
+      // New Truth or Dare flow: rules -> setup -> game
+      router.push('/truth-or-dare-rules' as any);
+    } else if (gameId === 'never_have_i_ever') {
+      // Never Have I Ever flow: rules -> setup -> game
+      router.push('/never-have-i-ever-rules' as any);
+    } else if (gameId === 'would_you_rather') {
+      // Would You Rather flow: rules -> setup -> game
+      router.push('/would-you-rather-rules' as any);
+    } else if (gameId === 'fuck_marry_kill') {
+      // Fuck Marry Kill flow: rules -> setup -> game
+      router.push('/fuck-marry-kill-rules' as any);
+    } else if (gameId === 'true_false_trivia') {
+      // True False Trivia flow: rules -> setup -> game
+      router.push('/true-false-trivia-rules' as any);
+    } else if (gameId === 'what_if') {
+      // What if flow: rules -> setup -> game
+      router.push('/what-if-rules' as any);
+    } else if (gameId === 'truth_or_drink') {
+      // Truth or Drink flow: rules -> setup -> game
+      router.push('/truth-or-drink-rules' as any);
+    } else if (gameId === 'kings_cup') {
+      // King's Cup flow: rules -> setup -> game
+      router.push('/kings-cup-rules' as any);
+    } else if (gameId === 'kiss_game') {
+      // Kiss game flow: rules -> setup -> game
+      router.push('/kiss-game-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',

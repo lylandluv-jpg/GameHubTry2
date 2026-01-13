@@ -120,7 +120,13 @@ export const gameColors = {
   simple_truth_or_dare: '#2563EB',
   truth_or_dare: '#FF6B6B',
   never_have_i_ever: '#4ECDC4',
-  would_you_rather: '#9B59B6'
+  would_you_rather: '#9B59B6',
+  fuck_marry_kill: '#FF6B6B',
+  true_false_trivia: '#4ECDC4',
+  what_if: '#6366F1',
+  truth_or_drink: '#DC2626',
+  kings_cup: '#BE123C',
+  kiss_game: '#E11D48'
 };
 
 // Mode-specific accent colors

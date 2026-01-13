@@ -99,6 +99,54 @@ export const dilemmas: Record<string, WouldYouRatherContent[]> = {
     { id: 'we8', mode: 'extreme', intensity: 5, optionA: 'Have to be tortured', optionB: 'Have to watch someone be tortured' },
     { id: 'we9', mode: 'extreme', intensity: 5, optionA: 'Have to kill someone', optionB: 'Have to watch someone die' },
     { id: 'we10', mode: 'extreme', intensity: 5, optionA: 'Have to die today', optionB: 'Have to live forever' }
+  ],
+  boyfriend: [
+    { id: 'wbf1', mode: 'boyfriend', intensity: 2, optionA: 'Have to tell your boyfriend everything', optionB: 'Have to keep secrets from your boyfriend' },
+    { id: 'wbf2', mode: 'boyfriend', intensity: 3, optionA: 'Have to let your boyfriend control your social media', optionB: 'Have to let your boyfriend read all your messages' },
+    { id: 'wbf3', mode: 'boyfriend', intensity: 2, optionA: 'Have to spend every weekend with your boyfriend', optionB: 'Have to never see your boyfriend on weekends' },
+    { id: 'wbf4', mode: 'boyfriend', intensity: 3, optionA: 'Have to tell your boyfriend about your ex', optionB: 'Have to tell your boyfriend your body count' },
+    { id: 'wbf5', mode: 'boyfriend', intensity: 2, optionA: 'Have to let your boyfriend choose your friends', optionB: 'Have to let your boyfriend choose your hobbies' },
+    { id: 'wbf6', mode: 'boyfriend', intensity: 3, optionA: 'Have to share everything with your boyfriend', optionB: 'Have to keep everything private from your boyfriend' },
+    { id: 'wbf7', mode: 'boyfriend', intensity: 2, optionA: 'Have to date someone your boyfriend hates', optionB: 'Have to let your boyfriend date someone you hate' },
+    { id: 'wbf8', mode: 'boyfriend', intensity: 3, optionA: 'Have to tell your boyfriend when he\'s wrong', optionB: 'Have to never disagree with your boyfriend' },
+    { id: 'wbf9', mode: 'boyfriend', intensity: 2, optionA: 'Have to go through your boyfriend\'s phone', optionB: 'Have to let your boyfriend go through your phone' },
+    { id: 'wbf10', mode: 'boyfriend', intensity: 3, optionA: 'Have to marry someone your boyfriend hates', optionB: 'Have to never marry your boyfriend' }
+  ],
+  girlfriend: [
+    { id: 'wgf1', mode: 'girlfriend', intensity: 2, optionA: 'Have to tell your girlfriend everything', optionB: 'Have to keep secrets from your girlfriend' },
+    { id: 'wgf2', mode: 'girlfriend', intensity: 3, optionA: 'Have to let your girlfriend control your social media', optionB: 'Have to let your girlfriend read all your messages' },
+    { id: 'wgf3', mode: 'girlfriend', intensity: 2, optionA: 'Have to spend every weekend with your girlfriend', optionB: 'Have to never see your girlfriend on weekends' },
+    { id: 'wgf4', mode: 'girlfriend', intensity: 3, optionA: 'Have to tell your girlfriend about your ex', optionB: 'Have to tell your girlfriend your body count' },
+    { id: 'wgf5', mode: 'girlfriend', intensity: 2, optionA: 'Have to let your girlfriend choose your friends', optionB: 'Have to let your girlfriend choose your hobbies' },
+    { id: 'wgf6', mode: 'girlfriend', intensity: 3, optionA: 'Have to share everything with your girlfriend', optionB: 'Have to keep everything private from your girlfriend' },
+    { id: 'wgf7', mode: 'girlfriend', intensity: 2, optionA: 'Have to date someone your girlfriend hates', optionB: 'Have to let your girlfriend date someone you hate' },
+    { id: 'wgf8', mode: 'girlfriend', intensity: 3, optionA: 'Have to tell your girlfriend when she\'s wrong', optionB: 'Have to never disagree with your girlfriend' },
+    { id: 'wgf9', mode: 'girlfriend', intensity: 2, optionA: 'Have to go through your girlfriend\'s phone', optionB: 'Have to let your girlfriend go through your phone' },
+    { id: 'wgf10', mode: 'girlfriend', intensity: 3, optionA: 'Have to marry someone your girlfriend hates', optionB: 'Have to never marry your girlfriend' }
+  ],
+  hot: [
+    { id: 'wht1', mode: 'hot', intensity: 4, optionA: 'Have to kiss someone you just met', optionB: 'Have to let someone kiss you' },
+    { id: 'wht2', mode: 'hot', intensity: 5, optionA: 'Have to make out with someone', optionB: 'Have to let someone make out with you' },
+    { id: 'wht3', mode: 'hot', intensity: 4, optionA: 'Have to strip for someone', optionB: 'Have to watch someone strip' },
+    { id: 'wht4', mode: 'hot', intensity: 5, optionA: 'Have to have sex in public', optionB: 'Have to have sex in front of friends' },
+    { id: 'wht5', mode: 'hot', intensity: 4, optionA: 'Have to give a lap dance', optionB: 'Have to receive a lap dance' },
+    { id: 'wht6', mode: 'hot', intensity: 5, optionA: 'Have to have a threesome', optionB: 'Have to watch a threesome' },
+    { id: 'wht7', mode: 'hot', intensity: 4, optionA: 'Have to give oral sex', optionB: 'Have to receive oral sex' },
+    { id: 'wht8', mode: 'hot', intensity: 5, optionA: 'Have to have phone sex', optionB: 'Have to have cyber sex' },
+    { id: 'wht9', mode: 'hot', intensity: 4, optionA: 'Have to be tied up', optionB: 'Have to tie someone up' },
+    { id: 'wht10', mode: 'hot', intensity: 5, optionA: 'Have to use handcuffs', optionB: 'Have to use a blindfold' }
+  ],
+  disgusting: [
+    { id: 'wds1', mode: 'disgusting', intensity: 4, optionA: 'Have to eat food off the floor', optionB: 'Have to eat food out of the trash' },
+    { id: 'wds2', mode: 'disgusting', intensity: 5, optionA: 'Have to drink toilet water', optionB: 'Have to drink from a puddle' },
+    { id: 'wds3', mode: 'disgusting', intensity: 4, optionA: 'Have to lick the bottom of a shoe', optionB: 'Have to lick a public toilet seat' },
+    { id: 'wds4', mode: 'disgusting', intensity: 5, optionA: 'Have to eat a bug', optionB: 'Have to eat a worm' },
+    { id: 'wds5', mode: 'disgusting', intensity: 4, optionA: 'Have to smell someone\'s armpit', optionB: 'Have to smell someone\'s feet' },
+    { id: 'wds6', mode: 'disgusting', intensity: 5, optionA: 'Have to eat food that fell in the toilet', optionB: 'Have to eat food that was in someone\'s mouth' },
+    { id: 'wds7', mode: 'disgusting', intensity: 4, optionA: 'Have to lick a public door handle', optionB: 'Have to lick a public handrail' },
+    { id: 'wds8', mode: 'disgusting', intensity: 5, optionA: 'Have to eat something that expired 5 years ago', optionB: 'Have to eat something that was in the trash' },
+    { id: 'wds9', mode: 'disgusting', intensity: 4, optionA: 'Have to drink someone else\'s spit', optionB: 'Have to drink someone else\'s sweat' },
+    { id: 'wds10', mode: 'disgusting', intensity: 5, optionA: 'Have to eat a hairball', optionB: 'Have to eat a booger' }
   ]
 };
 
