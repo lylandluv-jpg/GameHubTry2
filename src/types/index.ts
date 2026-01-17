@@ -108,4 +108,4 @@ export type RootStackParamList = {
   ResultScreen: { gameId: string };
 };
 
-export type GameId = 'truth_or_dare' | 'never_have_i_ever' | 'would_you_rather' | 'simple_truth_or_dare' | 'simple_would_you_rather' | 'fuck_marry_kill' | 'true_false_trivia' | 'what_if' | 'truth_or_drink' | 'kings_cup';
+export type GameId = 'truth_or_dare' | 'never_have_i_ever' | 'would_you_rather' | 'simple_truth_or_dare' | 'simple_would_you_rather' | 'fuck_marry_kill' | 'true_false_trivia' | 'what_if' | 'truth_or_drink' | 'kings_cup' | 'most_likely_to' | 'dice_of_love' | 'this_or_that' | 'trivia' | 'do_or_drink';

@@ -306,6 +306,187 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
+  },
+  {
+    id: 'spin_the_wheel',
+    name: 'Spin the wheel',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#FF6B9D' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#FF6B9D' }
+    ],
+    rules: [
+      'Spin the wheel to randomly select a game type',
+      'Games include: Truth, Dare, Never Have I Ever, Would You Rather, Who\'s Most Likely, HUM, Choose Someone, Group Drinking, Category',
+      'A card will appear showing the selected game statement',
+      'Follow the penalty instructions (taking sips or drinks)',
+      'Tap Done to continue and spin again',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'guess_the_emoji',
+    name: 'Guess The Emoji',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#FFD700' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#FFD700' }
+    ],
+    rules: [
+      'Look at the emoji combination on the card',
+      'Guess what phrase, movie, song, or concept it represents',
+      'You have 30 seconds to guess',
+      'Tap "Reveal" to see the answer',
+      'Tap "Skip" to move to the next card without revealing',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'most_likely_to',
+    name: 'Most Likely To',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#7c3aed' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#7c3aed' }
+    ],
+    rules: [
+      'Tap the card to reveal the question',
+      'Read the "Who is most likely to..." statement',
+      'Discuss and vote on who fits the description',
+      'Swipe the card to move to the next question',
+      'Be honest and have fun!',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'dice_of_love',
+    name: 'Dice of love',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#EC4899' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#EC4899' }
+    ],
+    rules: [
+      'Roll the dice to get a random action and body part',
+      'Perform the action on the selected body part',
+      'You can roll again for a new combination',
+      'Have fun and respect boundaries',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'this_or_that',
+    name: 'This or That',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#F59E0B' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#F59E0B' }
+    ],
+    rules: [
+      'Roll the dice to get a random action and body part combination',
+      'Perform the action on the selected body part',
+      'You can roll again for a new combination',
+      'Have fun and respect boundaries',
+      'Game continues until you exit'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'trivia',
+    name: 'Trivia',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#1ABC9C' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#1ABC9C' }
+    ],
+    rules: [
+      'Answer questions within the time limit',
+      'You have 60 seconds per question',
+      'You have 3 lives - wrong answers cost a life',
+      'Complete all 10 questions to win',
+      'Game ends if you run out of time or lives',
+      'Have fun and test your knowledge!'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'do_or_drink',
+    name: 'DO or Drink',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#00f2ff' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#00f2ff' }
+    ],
+    rules: [
+      'Tap the card to reveal the dare',
+      'You have 60 seconds to complete the dare',
+      'Tap "Done" if you complete the dare successfully',
+      'Tap "Skip" if you cannot complete it',
+      'Skipping means you must drink!',
+      'Complete the dare or take the shot',
+      'Game continues until all cards are drawn'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
   }
 ];
 
@@ -362,6 +543,27 @@ export default function DashboardScreen() {
     } else if (gameId === 'kiss_game') {
       // Kiss game flow: rules -> setup -> game
       router.push('/kiss-game-rules' as any);
+    } else if (gameId === 'spin_the_wheel') {
+      // Spin the wheel flow: rules -> setup -> game
+      router.push('/spin-the-wheel-rules' as any);
+    } else if (gameId === 'guess_the_emoji') {
+      // Guess The Emoji flow: rules -> setup -> game
+      router.push('/guess-the-emoji-rules' as any);
+    } else if (gameId === 'most_likely_to') {
+      // Most Likely To flow: rules -> setup -> game
+      router.push('/most-likely-to-rules' as any);
+    } else if (gameId === 'dice_of_love') {
+      // Dice of love flow: rules -> setup -> game
+      router.push('/dice-of-love-rules' as any);
+    } else if (gameId === 'this_or_that') {
+      // This or That flow: rules -> setup -> game
+      router.push('/this-or-that-rules' as any);
+    } else if (gameId === 'trivia') {
+      // Trivia flow: rules -> setup -> game
+      router.push('/trivia-rules' as any);
+    } else if (gameId === 'do_or_drink') {
+      // DO or Drink flow: rules -> setup -> game
+      router.push('/do-or-drink-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',

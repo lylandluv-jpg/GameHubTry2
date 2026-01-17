@@ -126,7 +126,14 @@ export const gameColors = {
   what_if: '#6366F1',
   truth_or_drink: '#DC2626',
   kings_cup: '#BE123C',
-  kiss_game: '#E11D48'
+  kiss_game: '#E11D48',
+  spin_the_wheel: '#FF6B9D',
+  guess_the_emoji: '#FFD700',
+  most_likely_to: '#7c3aed',
+  dice_of_love: '#EC4899',
+  this_or_that: '#F59E0B',
+  trivia: '#1ABC9C',
+  do_or_drink: '#00f2ff'
 };
 
 // Mode-specific accent colors
