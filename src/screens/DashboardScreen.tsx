@@ -133,7 +133,32 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
-  }
+},
+{
+  id: 'paranoia',
+  name: 'Paranoia',
+  category: 'Party',
+  modes: [
+    { id: 'simple', name: 'Simple', accentColor: '#9B59B6' },
+    { id: 'challenger', name: 'Challenger', accentColor: '#E74C3C' }
+  ],
+  rules: [
+    'Add at least 3 players to start',
+    'Pass phone to current player',
+    'Player secretly reveals a question',
+    'Player chooses who is the answer',
+    'Accused person can drink to reveal or stay safe'
+  ],
+  setupConstraints: {
+    minPlayers: 3,
+    maxPlayers: Infinity,
+    requiresModeSelection: true,
+    rewardOptional: false
+  },
+  stateMachine: {},
+  contentProvider: {},
+  endCondition: { type: 'manual' }
+}
 ];
 
 const categories = ['All', 'Party', 'Social', 'Icebreaker'];
@@ -160,6 +185,8 @@ const DashboardScreen: React.FC = () => {
     // Simple Truth or Dare doesn't require setup, go directly to game
     if (gameId === 'simple_truth_or_dare') {
       router.push('/simple-truth-or-dare');
+    } else if (gameId === 'paranoia') {
+      router.push('/paranoia-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',

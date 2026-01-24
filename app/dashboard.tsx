@@ -487,6 +487,65 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
+  },
+  {
+    id: 'paranoia',
+    name: 'Paranoia',
+    category: 'Party',
+    modes: [
+      { id: 'simple', name: 'Simple', accentColor: '#9B59B6' },
+      { id: 'challenger', name: 'Challenger', accentColor: '#E74C3C' }
+    ],
+    rules: [
+      'Add at least 3 players to start',
+      'Pass phone to current player',
+      'Player secretly reveals a question',
+      'Player chooses who is the answer',
+      'Accused person can drink to reveal or stay safe'
+    ],
+    setupConstraints: {
+      minPlayers: 3,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'spin_the_bottle',
+    name: 'Spin the Bottle',
+    category: 'Party',
+    modes: [
+      { id: 'friends', name: 'Friends', accentColor: '#9B59B6' },
+      { id: 'boyfriend', name: 'Boyfriend', accentColor: '#FF1493' },
+      { id: 'girlfriend', name: 'Girlfriend', accentColor: '#FF1493' },
+      { id: 'couple', name: 'Couple', accentColor: '#FF1493' },
+      { id: 'teens', name: 'Teens', accentColor: '#1ABC9C' },
+      { id: 'party', name: 'Party', accentColor: '#F39C12' },
+      { id: 'drunk', name: 'Drunk', accentColor: '#E67E22', warning: 'Adults only' },
+      { id: 'dirty', name: 'Dirty', accentColor: '#C0392B', warning: 'Adults only' },
+      { id: 'hot', name: 'Hot', accentColor: '#C0392B', warning: 'Adults only' },
+      { id: 'extreme', name: 'Extreme', accentColor: '#8B0000', warning: 'Adults only' },
+      { id: 'disgusting', name: 'Disgusting', accentColor: '#8B0000', warning: 'Adults only' }
+    ],
+    rules: [
+      'Add at least 2 players to start',
+      'Spin the bottle to select a performer',
+      'Spin again to select a receiver',
+      'Complete the challenge or take a drink',
+      'Game continues until players exit'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
   }
 ];
 
@@ -564,6 +623,12 @@ export default function DashboardScreen() {
     } else if (gameId === 'do_or_drink') {
       // DO or Drink flow: rules -> setup -> game
       router.push('/do-or-drink-rules' as any);
+    } else if (gameId === 'paranoia') {
+      // Paranoia flow: rules -> setup -> game
+      router.push('/paranoia-rules' as any);
+    } else if (gameId === 'spin_the_bottle') {
+      // Spin the Bottle flow: rules -> setup -> game
+      router.push('/spin-the-bottle-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',

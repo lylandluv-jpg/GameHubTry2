@@ -133,7 +133,8 @@ export const gameColors = {
   dice_of_love: '#EC4899',
   this_or_that: '#F59E0B',
   trivia: '#1ABC9C',
-  do_or_drink: '#00f2ff'
+  do_or_drink: '#00f2ff',
+  paranoia: '#9B59B6'
 };
 
 // Mode-specific accent colors
