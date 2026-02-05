@@ -546,6 +546,416 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
+  },
+  {
+    id: 'mainstream_or_adult_film',
+    name: 'Mainstream or Adult Film',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#FF4444' }
+    ],
+    rules: [
+      'Guess if the movie title is mainstream or adult film parody',
+      'You have 15 seconds per question',
+      'Tap "ADULT FILM" or "REAL MOVIE" to answer',
+      'Correct answers increase your score',
+      'Wrong answers or timeouts move to next question',
+      'Complete all questions to see your final score'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'startup_or_scam',
+    name: 'Start Up or Scam',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#00E676' }
+    ],
+    rules: [
+      'Guess if the business idea is a real startup or a scam/fiction',
+      'You have 15 seconds per question',
+      'Tap "REAL START-UP" or "SCAM / FICTION" to answer',
+      'Correct answers increase your score',
+      'Wrong answers or timeouts move to next question',
+      'Complete all questions to see your final score'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'florida_man',
+    name: 'Florida Man',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#2ECC71' }
+    ],
+    rules: [
+      'Guess if the Florida Man story is fact or fiction',
+      'You have 15 seconds per question',
+      'Tap "FACT (Florida Man)" or "FICTION" to answer',
+      'Correct answers increase your score',
+      'Wrong answers or timeouts move to next question',
+      'Complete all questions to see your final score'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'info_vs_infox',
+    name: 'Info vs InfoX',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#0984e3' }
+    ],
+    rules: [
+      'Guess if the statement is true (INFO) or false (INFOX)',
+      'You have 15 seconds per question',
+      'Tap "INFO" or "INFOX" to answer',
+      'Correct answers increase your score',
+      'Wrong answers or timeouts move to next question',
+      'Complete all questions to see your final score'
+    ],
+    setupConstraints: {
+      minPlayers: 1,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'fun_trivia',
+    name: 'Fun Trivia',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#4B0082' }
+    ],
+    rules: [
+      'Add at least 2 players to start',
+      'Each player can answer the trivia question',
+      'Tap to reveal the answer',
+      'Award points to players who answer correctly',
+      'Skip questions if needed',
+      'Complete all questions to see the winner'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'rapid_fire',
+    name: 'Rapid Fire',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#8A2BE2' }
+    ],
+    rules: [
+      'Add at least 2 players to start',
+      'Set the number of questions (5 to 15)',
+      'Read the question aloud',
+      'First player to answer gets the point',
+      'Skip questions if needed',
+      'Complete all questions to see the winner'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'sticky_situation',
+    name: 'Sticky Situation',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#A020F0' }
+    ],
+    rules: [
+      'Add at least 2 players to start',
+      'Set the number of situations (1 to 15)',
+      'Read the situation out loud',
+      'Vote on who had the best answer',
+      'Award a point to the winner',
+      'Skip situations if needed',
+      'Complete all situations to see the winner'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'charades',
+    name: 'Charades',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'Divide players into two teams and have each team nominate a player to be their mime',
+      'The mime takes a word and acts it out in front of their team',
+      'Each team gets 1 minute to correctly guess the word that their mime is acting out',
+      'A correct answer scores 1 point for the team',
+      'First team to complete all rounds wins the game',
+      'The opposing team cannot say anything during the turn!'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'pig',
+    name: 'Pig',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#FF8C42' }
+    ],
+    rules: [
+      'Players take turns rolling a single die, aiming to accumulate points',
+      'After each roll, choose to risk continuing or hold and add score',
+      'Rolling a 1 ends turn immediately with zero points for that round',
+      'Balance risk versus reward as you push your luck each turn',
+      'First player to reach target score wins the game'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'the_password_is',
+    name: 'The Password is',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'Players work in teams to convey specific words to their teammates using just one-word clues',
+      'Both teams are trying to guess the same word',
+      'Players must be both concise and clever with their hints',
+      'The goal is to get your teammate to guess the word before the opposing team',
+      'Clue Givers offer a one-word clue about the given word',
+      'The Guesser from the starting team attempts to identify the word',
+      'If they guess correctly, their team scores a point',
+      'If the first guess misses the mark, the opposing team takes their shot',
+      'Play continues until one of the Guessers successfully pins down the word',
+      'At the culmination of the agreed rounds, the team racking up the most points clinches victory'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'read_my_lips',
+    name: 'Read My Lips',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'Players take turns attempting to understand a spoken sentence by relying solely on their ability to read lips',
+      'As each player grapples with the nuances of lip movements and the absence of sound, the resulting guesses often lead to laughter and surprise',
+      'The player with the most correct guesses at the end claims victory',
+      'Press the Let\'s Play button on this page',
+      'Gather your players and decide on the number of rounds or questions you\'d like to play',
+      'Enter each player\'s name into the app',
+      'Specify the number of questions each person will attempt to lip-read using the app',
+      'The app randomly selects one player to be the "Reader" and the other players to be the "Guessers"',
+      'The app provides the Reader with a sentence',
+      'The Reader faces the Guesser(s) and articulates the sentence clearly, mouthing each word without making any sound',
+      'If the Guesser correctly identifies the sentence, they earn a point. If not, no points are awarded for that round',
+      'After each round, roles rotate among the players. If there are more than two participants, the app continues to assign roles',
+      'The game continues, repeating the previous steps until each player has had an opportunity to guess the set number of sentences',
+      'The winner is the player who scores the most amount of points at the end of the game'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'challenge_champion',
+    name: 'Challenge Champion',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'Players compete to excel in creative challenges, with one player acting as the judge each round',
+      'The goal is to perform tasks in the most innovative or entertaining way to win points',
+      'The player who earns the most points by the end of the game is the Challenge Champion',
+      'Add at least 3 players to start',
+      'Choose a category and number of challenges',
+      'The app selects the first judge',
+      'The judge reads a challenge aloud and all players except the judge perform',
+      'The judge awards 1 point to the winning player',
+      'A new judge is selected for the next round',
+      'Complete all challenges to see the winner'
+    ],
+    setupConstraints: {
+      minPlayers: 3,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'through_the_green_glass_door',
+    name: 'Through the Green Glass Door',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'Choose a player to kick-start the game with the announcement, "Through the Green Glass Door, I am able to bring..." followed by their chosen item',
+      'This player takes on the role of the rule-maker, crafting a covert standard that governs which items can traverse the threshold of the Green Glass Door',
+      'For instance, if the secret stipulation is items with repeating letters, they might say, "I am able to bring a kitten"',
+      'The remaining players then take turns attempting to figure out the hidden rule by proposing various items they wish to bring through the door',
+      'MILK DOESN\'T GO THROUGH THE DOOR!',
+      'Select one person as the gatekeeper of the Green Glass Door. This individual is tasked with establishing a rule that others must decipher to bring something through the door',
+      '"Behind the Green Glass Door" is a word game where one person knows a secret rule about what can and cannot go "behind the green glass door"',
+      'The other players try to figure out the rule by suggesting objects and being told whether they can or cannot go through the door',
+      'For example, the secret rule might be only items with paired letters. Alternatively, it could be only items that contain a certain feature, like double letters in their names',
+      'Tailor the subtlety of the hint to suit the group\'s age',
+      'Begin by stating "Behind the Green Glass Door, I can bring..." then mention an object that abides by your pattern',
+      'Proceed to inquire "What can you bring?" to everybody',
+      'The other players are unaware at first, but they must name an object that conforms to your hidden criterion',
+      'If they suggest something that doesn\'t align with your rule, you must inform them "Unfortunately, that can\'t pass through the Green Glass Door"',
+      'If nobody says anything that can go through the door, give another example of something that can go behind the green glass door',
+      'Continue the game until the participants begin to realize they must offer something that adheres to the rule you\'ve conceived',
+      'Some may remain perplexed, which is part of the amusement'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'blabble',
+    name: 'Blabble',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'One player acts as the host who enters the names of all players and chooses the total number of questions (aka Blabbles) to determine the game\'s length',
+      'The app then displays an English phrase to the host, who then shows the scrambled version to all players',
+      'Players try to read the jumbled phrase aloud and guess the correct phrase',
+      'The first player to correctly yell out the gibberish phrase scores a point, and the player with the most points at the end of the game wins'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'thumbs_up_thumbs_down',
+    name: 'Thumbs Up Thumbs Down',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#9D36F6' }
+    ],
+    rules: [
+      'It\'s not about what you like, but what you think everyone else will choose',
+      'When presented with a question, will you thumbs up for the first option or thumbs down for the second?',
+      'Remember, you\'re aiming to match the majority! It\'s all about predicting the group\'s vibe and riding that wave',
+      'Designate one person to be the host who holds the phone and announces all questions to the group',
+      'The host can also participate in the game',
+      'The app displays a binary question, such as "Beach or Mountains?"',
+      'The host reads this question aloud and says "3, 2, 1, go!"',
+      'All players must quickly decide and indicate their choice by either sticking their thumbs up or down',
+      'A thumbs-up always corresponds to the first option, while a thumbs-down always denotes the second',
+      'Once votes are cast, players compare choices',
+      'The host taps on the ✓ mark for being in the majority or the ✗ mark for being in the minority for each player',
+      'Only players who were in the majority score points',
+      'After the reveal, dive into playful debates, light-hearted teasing, and spirited discussions',
+      'Once ready for the next round, the host presses the \'Next Question\' button',
+      'This cycle continues until all questions have been posed',
+      'At the game\'s conclusion, the app reveals the total points for each player, with the highest scorer declared the winner'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
   }
 ];
 
@@ -629,6 +1039,51 @@ export default function DashboardScreen() {
     } else if (gameId === 'spin_the_bottle') {
       // Spin the Bottle flow: rules -> setup -> game
       router.push('/spin-the-bottle-rules' as any);
+    } else if (gameId === 'mainstream_or_adult_film') {
+      // Mainstream or Adult Film flow: rules -> game
+      router.push('/mainstream-or-adult-film-rules' as any);
+    } else if (gameId === 'startup_or_scam') {
+      // Start Up or Scam flow: rules -> game
+      router.push('/startup-or-scam-rules' as any);
+    } else if (gameId === 'florida_man') {
+      // Florida Man flow: rules -> game
+      router.push('/florida-man-rules' as any);
+    } else if (gameId === 'info_vs_infox') {
+      // Info vs InfoX flow: rules -> game
+      router.push('/info-vs-infox-rules' as any);
+    } else if (gameId === 'fun_trivia') {
+      // Fun Trivia flow: rules -> game
+      router.push('/fun-trivia-rules' as any);
+    } else if (gameId === 'rapid_fire') {
+      // Rapid Fire flow: rules -> game
+      router.push('/rapid-fire-rules' as any);
+    } else if (gameId === 'sticky_situation') {
+      // Sticky Situation flow: rules -> game
+      router.push('/sticky-situation-rules' as any);
+    } else if (gameId === 'charades') {
+      // Charades flow: rules -> game
+      router.push('/charades-rules' as any);
+    } else if (gameId === 'pig') {
+      // Pig flow: rules -> game
+      router.push('/pig-rules' as any);
+    } else if (gameId === 'the_password_is') {
+      // The Password is flow: rules -> game
+      router.push('/the-password-is-rules' as any);
+    } else if (gameId === 'read_my_lips') {
+      // Read My Lips flow: rules -> game
+      router.push('/read-my-lips-rules' as any);
+    } else if (gameId === 'challenge_champion') {
+      // Challenge Champion flow: rules -> game
+      router.push('/challenge-champion-rules' as any);
+    } else if (gameId === 'through_the_green_glass_door') {
+      // Through the Green Glass Door flow: rules -> game
+      router.push('/through-the-green-glass-door-rules' as any);
+    } else if (gameId === 'blabble') {
+      // Blabble flow: rules -> game
+      router.push('/blabble-rules' as any);
+    } else if (gameId === 'thumbs_up_thumbs_down') {
+      // Thumbs Up Thumbs Down flow: rules -> game
+      router.push('/thumbs-up-thumbs-down-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',

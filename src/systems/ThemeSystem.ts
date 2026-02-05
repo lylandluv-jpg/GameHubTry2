@@ -1,4 +1,4 @@
-// Theme system for consistent styling across the app
+// Theme system for consistent styling across app
 // Based on specs/core/GameHubMaster.sdd.md Section 7
 
 import { Dimensions } from 'react-native';
@@ -134,7 +134,23 @@ export const gameColors = {
   this_or_that: '#F59E0B',
   trivia: '#1ABC9C',
   do_or_drink: '#00f2ff',
-  paranoia: '#9B59B6'
+  paranoia: '#9B59B6',
+  spin_the_bottle: '#9B59B6',
+  mainstream_or_adult_film: '#FF4444',
+  startup_or_scam: '#00E676',
+  florida_man: '#2ECC71',
+  info_vs_infox: '#0984e3',
+  fun_trivia: '#4B0082',
+  rapid_fire: '#8A2BE2',
+  sticky_situation: '#A020F0',
+  charades: '#9D36F6',
+  pig: '#FF8C42',
+  challenge_champion: '#9D36F6',
+  // password_is: '#9D36F6',
+  read_my_lips: '#9D36F6',
+  through_the_green_glass_door: '#9D36F6',
+  blabble: '#9D36F6',
+  thumbs_up_thumbs_down: '#9D36F6'
 };
 
 // Mode-specific accent colors
