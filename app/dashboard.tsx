@@ -8,63 +8,52 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-  TextInput
+  TextInput,
+  Modal,
+  ActivityIndicator
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { RootStackParamList, GameSpec, GameId } from '../src/types';
 import { theme, gameColors } from '../src/systems/ThemeSystem';
 import { useFadeIn, useScaleIn } from '../src/systems/AnimationPresets';
-import AnimatedButton from '../src/components/AnimatedButton';
+import { Multiplayer } from '../src/multiplayer';
+import { useLanguage } from '../src/systems/LanguageContext';
+import { useUserProfile } from '../src/systems/UserProfileContext';
+
+// Short descriptions and optional badges for dashboard game cards
+const gameCardMeta: Record<string, { shortDescription: string; badge?: 'New!' | 'Updated!' }> = {
+  truth_or_dare: { shortDescription: 'Choose truth or dare and complete the challenge.', badge: 'New!' },
+  never_have_i_ever: { shortDescription: 'Reveal your secrets—if you\'ve done it, take a drink!' },
+  would_you_rather: { shortDescription: 'Pick between two options. Minority drinks!' },
+  fuck_marry_kill: { shortDescription: 'Decide: one night, forever, or eliminate. Swipe to the next round.' },
+  fun_trivia: { shortDescription: 'Fun, head-to-head trivia with fun questions—no boring stuff!' },
+  kings_cup: { shortDescription: 'The ultimate party game of rules, chaos, and drinks!' },
+  through_the_green_glass_door: { shortDescription: 'Guess the pattern to pass through the Green Glass Door.', badge: 'Updated!' },
+  trivia: { shortDescription: 'Answer questions within the time limit. Test your knowledge!' },
+  spin_the_wheel: { shortDescription: 'Spin to randomly select a game type—Truth, Dare, and more.' },
+  charades: { shortDescription: 'Act it out! Teams guess the word from your mime.' },
+  most_likely_to: { shortDescription: 'Who is most likely to...? Vote and debate!' },
+  do_or_drink: { shortDescription: 'Complete the dare or take the shot. You have 60 seconds.' },
+  paranoia: { shortDescription: 'Secret questions, chosen targets. Drink to reveal or stay safe.' },
+  spin_the_bottle: { shortDescription: 'Spin to select performer and receiver. Complete the challenge!' },
+  guess_the_emoji: { shortDescription: 'Guess the phrase from the emoji combination.' },
+  blabble: { shortDescription: 'Unscramble the phrase and yell it out first to score.' },
+  thumbs_up_thumbs_down: { shortDescription: 'Match the majority—thumbs up or down. Predict the group!' },
+  impostor: { shortDescription: 'A social deduction game where everyone knows the secret word except the impostors.' },
+  word_wizards: { shortDescription: 'A team guessing game with creative expression modes — explain, act, draw, hum and more!', badge: 'New!' }
+};
+
+function getGameDescription(game: GameSpec): string {
+  return gameCardMeta[game.id]?.shortDescription ?? (game.rules[0] || 'Party game for your group.');
+}
+function getGameBadge(game: GameSpec): 'New!' | 'Updated!' | undefined {
+  return gameCardMeta[game.id]?.badge;
+}
 
 // Game specifications
 const games: GameSpec[] = [
-  {
-    id: 'simple_would_you_rather',
-    name: 'Simple Would You Rather',
-    category: 'Party',
-    modes: [
-      { id: 'original', name: 'Original', accentColor: '#8B5CF6' }
-    ],
-    rules: [
-      'Tap card to reveal options',
-      'Swipe card left or right to continue',
-      'Discuss and debate with friends',
-      'No penalties, just fun!'
-    ],
-    setupConstraints: {
-      minPlayers: 1,
-      maxPlayers: Infinity,
-      requiresModeSelection: false,
-      rewardOptional: false
-    },
-    stateMachine: {},
-    contentProvider: {},
-    endCondition: { type: 'manual' }
-  },
-  {
-    id: 'simple_truth_or_dare',
-    name: 'Simple Truth or Dare',
-    category: 'Party',
-    modes: [
-      { id: 'original', name: 'Original', accentColor: '#2563EB' }
-    ],
-    rules: [
-      'Tap TRUTH or DARE on card to reveal',
-      'Swipe card left or right to continue',
-      'Complete task honestly',
-      'No penalties, just fun!'
-    ],
-    setupConstraints: {
-      minPlayers: 1,
-      maxPlayers: Infinity,
-      requiresModeSelection: false,
-      rewardOptional: false
-    },
-    stateMachine: {},
-    contentProvider: {},
-    endCondition: { type: 'manual' }
-  },
   {
     id: 'truth_or_dare',
     name: 'Truth or Dare',
@@ -956,17 +945,82 @@ const games: GameSpec[] = [
     stateMachine: {},
     contentProvider: {},
     endCondition: { type: 'manual' }
+  },
+  {
+    id: 'impostor',
+    name: 'Impostor',
+    category: 'Party',
+    modes: [
+      { id: 'original', name: 'Original', accentColor: '#FF5722' }
+    ],
+    rules: [
+      'Draw Roles: Everyone draws a role. Most players see the secret word, but impostors see nothing.',
+      'Give Clues: Players take turns giving hints about the secret word (impostors must fake it without knowing the word).',
+      'Unmask Impostors: The group discusses and tries to identify who doesn\'t actually know the word.',
+      'Vote & Win: If the group finds all impostors, they win. If impostors stay hidden or guess the word, impostors win!',
+      'Game Modes: You can either play Question-Answer (players ask each other questions about the word) or One-Word (each player says one word related to the secret word).'
+    ],
+    setupConstraints: {
+      minPlayers: 2,
+      maxPlayers: Infinity,
+      requiresModeSelection: false,
+      rewardOptional: true
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'manual' }
+  },
+  {
+    id: 'word_wizards',
+    name: 'Word Wizards',
+    category: 'Party',
+    modes: [
+      { id: 'explain', name: 'Explain', accentColor: '#F5A623' },
+      { id: 'act', name: 'Act', accentColor: '#F5A623' },
+      { id: 'draw', name: 'Draw', accentColor: '#F5A623' },
+      { id: 'hum', name: 'Hum', accentColor: '#F5A623' },
+      { id: 'one_word', name: 'One Word', accentColor: '#F5A623' }
+    ],
+    rules: [
+      'Choose Teams & Modes: Split into competing teams and pick which game modes to play with.',
+      'Express & Guess: You have 60 seconds to express as many words as possible using the selected modes while your team guesses. Score +1 for correct, -1 for wrong. You can skip three words per round.',
+      'Pass & Win: When time runs out, pass the phone to the next player. Team with most points claims victory!'
+    ],
+    setupConstraints: {
+      minPlayers: 4,
+      maxPlayers: Infinity,
+      requiresModeSelection: true,
+      rewardOptional: false
+    },
+    stateMachine: {},
+    contentProvider: {},
+    endCondition: { type: 'score' }
   }
 ];
 
-const categories = ['All', 'Party', 'Social', 'Icebreaker'];
+
+const categoryKeys = ['All', 'Party', 'Social', 'Icebreaker'] as const;
 
 export default function DashboardScreen() {
   const router = useRouter();
+  const { t } = useLanguage();
+  const { username: profileUsername } = useUserProfile();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [joinPlayerName, setJoinPlayerName] = useState('');
+  const [joinRoomCode, setJoinRoomCode] = useState('');
+  const [joinLoading, setJoinLoading] = useState(false);
+  const [joinError, setJoinError] = useState<string | null>(null);
   const { animatedStyle: fadeStyle, animate: animateFade } = useFadeIn();
   const { animatedStyle: scaleStyle, animate: animateScale } = useScaleIn();
+
+  const categoryLabels: Record<string, string> = {
+    All: t('dashboard.categoryAll'),
+    Party: t('dashboard.categoryParty'),
+    Social: t('dashboard.categorySocial'),
+    Icebreaker: t('dashboard.categoryIcebreaker'),
+  };
 
   useEffect(() => {
     animateFade();
@@ -980,12 +1034,7 @@ export default function DashboardScreen() {
   });
 
   const handleGamePress = (gameId: GameId) => {
-    // Simple games don't require setup, go directly to game
-    if (gameId === 'simple_truth_or_dare') {
-      router.push('/simple-truth-or-dare' as any);
-    } else if (gameId === 'simple_would_you_rather') {
-      router.push('/simple-would-you-rather' as any);
-    } else if (gameId === 'truth_or_dare') {
+    if (gameId === 'truth_or_dare') {
       // New Truth or Dare flow: rules -> setup -> game
       router.push('/truth-or-dare-rules' as any);
     } else if (gameId === 'never_have_i_ever') {
@@ -1084,6 +1133,12 @@ export default function DashboardScreen() {
     } else if (gameId === 'thumbs_up_thumbs_down') {
       // Thumbs Up Thumbs Down flow: rules -> game
       router.push('/thumbs-up-thumbs-down-rules' as any);
+    } else if (gameId === 'impostor') {
+      // Impostor: show description and rules first
+      router.push('/impostor-rules' as any);
+    } else if (gameId === 'word_wizards') {
+      // Word Wizards: rules -> setup -> game
+      router.push('/word-wizards-rules' as any);
     } else {
       router.push({
         pathname: '/game-setup',
@@ -1100,18 +1155,110 @@ export default function DashboardScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Animated.View style={[styles.header, fadeStyle]}>
-          <Text style={styles.title}>GameHub</Text>
-          <Text style={styles.subtitle}>Choose your adventure</Text>
+          <View style={styles.headerRow}>
+            <Pressable
+              style={styles.settingsIconButton}
+              onPress={() => router.push('/settings' as any)}
+              hitSlop={12}
+            >
+              <Ionicons name="settings-outline" size={24} color={theme.colors.text} />
+            </Pressable>
+            <View style={styles.headerLeft}>
+              <Text style={styles.title}>{t('dashboard.title')}</Text>
+              <Text style={styles.subtitle}>{t('dashboard.subtitle')}</Text>
+            </View>
+            <Pressable
+              style={styles.joinGameButton}
+              onPress={() => {
+                if (profileUsername) setJoinPlayerName(profileUsername);
+                setShowJoinModal(true);
+              }}
+            >
+              <Text style={styles.joinGameButtonText}>{t('dashboard.joinGame')}</Text>
+            </Pressable>
+          </View>
         </Animated.View>
 
+        <Modal
+          visible={showJoinModal}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setShowJoinModal(false)}
+        >
+          <Pressable style={styles.modalOverlay} onPress={() => setShowJoinModal(false)}>
+            <Pressable style={styles.joinModalContent} onPress={(e) => e.stopPropagation()}>
+              <Text style={styles.joinModalTitle}>{t('dashboard.joinGame')}</Text>
+              <TextInput
+                style={styles.joinInput}
+                placeholder="Player name"
+                placeholderTextColor={theme.colors.textMuted}
+                value={joinPlayerName}
+                onChangeText={setJoinPlayerName}
+                autoCapitalize="words"
+              />
+              <TextInput
+                style={styles.joinInput}
+                placeholder="6-digit code (numbers only)"
+                placeholderTextColor={theme.colors.textMuted}
+                value={joinRoomCode}
+                onChangeText={(t) => setJoinRoomCode(t.replace(/\D/g, '').slice(0, 6))}
+                keyboardType="number-pad"
+                maxLength={6}
+                inputMode="numeric"
+              />
+              {joinError ? <Text style={styles.joinError}>{joinError}</Text> : null}
+              <Pressable
+                style={styles.joinSubmitButton}
+                onPress={async () => {
+                  const name = joinPlayerName.trim() || 'Player';
+                  const code = joinRoomCode.trim();
+                  if (!/^\d{6}$/.test(code)) {
+                    setJoinError('Enter a 6-digit code (numbers only)');
+                    return;
+                  }
+                  setJoinError(null);
+                  setJoinLoading(true);
+                  try {
+                    await Multiplayer.joinRoom(code.toUpperCase(), name);
+                    setShowJoinModal(false);
+                    setJoinPlayerName('');
+                    setJoinRoomCode('');
+                    router.push('/multiplayer-truth-or-dare' as any);
+                  } catch (e) {
+                    setJoinError(e instanceof Error ? e.message : 'Could not join');
+                  } finally {
+                    setJoinLoading(false);
+                  }
+                }}
+                disabled={joinLoading}
+              >
+                {joinLoading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.joinSubmitButtonText}>Join</Text>
+                )}
+              </Pressable>
+              <Pressable style={styles.joinCancelButton} onPress={() => setShowJoinModal(false)}>
+                <Text style={styles.joinCancelText}>{t('common.cancel')}</Text>
+              </Pressable>
+            </Pressable>
+          </Pressable>
+        </Modal>
+
         <Animated.View style={[styles.searchContainer, fadeStyle]}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search games..."
-            placeholderTextColor={theme.colors.textMuted}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
+          <View style={styles.searchBar}>
+            <Ionicons name="search" size={22} color="#333" style={styles.searchIcon} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder={t('dashboard.searchPlaceholder')}
+              placeholderTextColor="#9CA3AF"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            <Pressable style={styles.filterIconButton} hitSlop={8}>
+              <Ionicons name="options-outline" size={22} color="#333" />
+            </Pressable>
+          </View>
         </Animated.View>
 
         <Animated.View style={[styles.categoriesContainer, fadeStyle]}>
@@ -1120,7 +1267,7 @@ export default function DashboardScreen() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.categoriesScroll}
           >
-            {categories.map((category) => (
+            {categoryKeys.map((category) => (
               <Pressable
                 key={category}
                 style={[
@@ -1135,7 +1282,7 @@ export default function DashboardScreen() {
                     selectedCategory === category && styles.categoryTextActive
                   ]}
                 >
-                  {category}
+                  {categoryLabels[category]}
                 </Text>
               </Pressable>
             ))}
@@ -1143,20 +1290,35 @@ export default function DashboardScreen() {
         </Animated.View>
 
         <Animated.View style={[styles.gamesContainer, scaleStyle]}>
-          {filteredGames.map((game, index) => (
-            <AnimatedButton
-              key={game.id}
-              title={game.name}
-              onPress={() => handleGamePress(game.id as GameId)}
-              variant="primary"
-              style={[
-                styles.gameCard,
-                { backgroundColor: gameColors[game.id as keyof typeof gameColors] }
-              ] as any}
-              textStyle={styles.gameCardText}
-              fullWidth
-            />
-          ))}
+          {filteredGames.map((game) => {
+            const accentColor = gameColors[game.id as keyof typeof gameColors] || theme.gradients.primary[0];
+            const badge = getGameBadge(game);
+            return (
+              <Pressable
+                key={game.id}
+                style={[styles.gameCard, styles.gameCardShadow]}
+                onPress={() => handleGamePress(game.id as GameId)}
+              >
+                <View style={[styles.gameCardImageArea, { backgroundColor: accentColor }]}>
+                  <View style={styles.gameCardImagePlaceholder}>
+                    <Ionicons name="game-controller-outline" size={40} color="rgba(255,255,255,0.5)" />
+                  </View>
+                  {badge ? (
+                    <View style={[styles.gameCardBadge, badge === 'New!' ? styles.badgeNew : styles.badgeUpdated]}>
+                      <Ionicons name="sparkles" size={12} color="#fff" />
+                      <Text style={styles.gameCardBadgeText}>{badge}</Text>
+                    </View>
+                  ) : null}
+                </View>
+                <View style={[styles.gameCardTextArea, { backgroundColor: accentColor }]}>
+                  <Text style={styles.gameCardTitle} numberOfLines={1}>{game.name}</Text>
+                  <Text style={styles.gameCardDescription} numberOfLines={2}>
+                    {getGameDescription(game)}
+                  </Text>
+                </View>
+              </Pressable>
+            );
+          })}
         </Animated.View>
       </ScrollView>
     </View>
@@ -1189,14 +1351,31 @@ const styles = StyleSheet.create({
   searchContainer: {
     marginBottom: theme.spacing.lg
   },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    paddingVertical: theme.spacing.sm,
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.sm,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3
+  },
+  searchIcon: {
+    marginRight: theme.spacing.sm
+  },
   searchInput: {
     ...theme.typography.body,
-    backgroundColor: theme.colors.card,
-    color: theme.colors.text,
-    padding: theme.spacing.md,
-    borderRadius: theme.borderRadius.md,
-    borderWidth: 1,
-    borderColor: theme.colors.border
+    flex: 1,
+    color: '#1F2937',
+    paddingVertical: theme.spacing.xs
+  },
+  filterIconButton: {
+    padding: theme.spacing.sm
   },
   categoriesContainer: {
     marginBottom: theme.spacing.xl
@@ -1229,12 +1408,138 @@ const styles = StyleSheet.create({
     gap: theme.spacing.md
   },
   gameCard: {
-    padding: theme.spacing.xl,
+    flexDirection: 'row',
     borderRadius: theme.borderRadius.lg,
+    overflow: 'hidden',
+    minHeight: 120
+  },
+  gameCardShadow: {
     ...theme.shadows.lg
   },
-  gameCardText: {
+  gameCardImageArea: {
+    width: '32%',
+    minWidth: 100,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  gameCardImagePlaceholder: {
+    position: 'absolute'
+  },
+  gameCardTextArea: {
+    flex: 1,
+    padding: theme.spacing.md,
+    justifyContent: 'center',
+    paddingLeft: theme.spacing.lg
+  },
+  gameCardTitle: {
+    ...theme.typography.h3,
+    color: '#FFFFFF',
+    marginBottom: theme.spacing.xs
+  },
+  gameCardDescription: {
+    ...theme.typography.bodySmall,
+    color: 'rgba(255,255,255,0.95)',
+    lineHeight: 20
+  },
+  gameCardBadge: {
+    position: 'absolute',
+    top: theme.spacing.sm,
+    left: theme.spacing.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: theme.spacing.sm,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4
+  },
+  badgeNew: {
+    backgroundColor: '#EAB308'
+  },
+  badgeUpdated: {
+    backgroundColor: '#22C55E'
+  },
+  gameCardBadgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#FFFFFF'
+  },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
+  },
+  settingsIconButton: {
+    padding: theme.spacing.xs,
+    marginRight: theme.spacing.sm
+  },
+  headerLeft: {
+    flex: 1
+  },
+  joinGameButton: {
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.borderRadius.sm,
+    borderWidth: 1,
+    borderColor: theme.gradients.primary[0]
+  },
+  joinGameButtonText: {
+    ...theme.typography.bodySmall,
+    color: theme.gradients.primary[0],
+    fontWeight: '600'
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: theme.colors.overlay,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: theme.spacing.lg
+  },
+  joinModalContent: {
+    backgroundColor: theme.colors.card,
+    borderRadius: theme.borderRadius.lg,
+    padding: theme.spacing.xl,
+    width: '100%',
+    maxWidth: 340
+  },
+  joinModalTitle: {
     ...theme.typography.h2,
-    color: theme.colors.text
+    color: theme.colors.text,
+    marginBottom: theme.spacing.lg
+  },
+  joinInput: {
+    ...theme.typography.body,
+    backgroundColor: theme.colors.backgroundLight,
+    color: theme.colors.text,
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.md,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    marginBottom: theme.spacing.md
+  },
+  joinError: {
+    ...theme.typography.bodySmall,
+    color: theme.colors.error,
+    marginBottom: theme.spacing.sm
+  },
+  joinSubmitButton: {
+    backgroundColor: theme.gradients.primary[0],
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.md,
+    alignItems: 'center',
+    marginBottom: theme.spacing.sm
+  },
+  joinSubmitButtonText: {
+    ...theme.typography.body,
+    color: '#fff',
+    fontWeight: '600'
+  },
+  joinCancelButton: {
+    padding: theme.spacing.sm,
+    alignItems: 'center'
+  },
+  joinCancelText: {
+    ...theme.typography.bodySmall,
+    color: theme.colors.textSecondary
   }
 });

@@ -2,15 +2,22 @@ import {Stack} from 'expo-router';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {GameSessionProvider} from '../src/systems/GameSessionContext';
+import {LanguageProvider} from '../src/systems/LanguageContext';
+import {UserProfileProvider} from '../src/systems/UserProfileContext';
 
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
+        <LanguageProvider>
+        <UserProfileProvider>
         <GameSessionProvider>
           <Stack screenOptions={{headerShown: false}}>
           <Stack.Screen name="index" options={{headerShown: false}} />
           <Stack.Screen name="dashboard" options={{headerShown: false}} />
+          <Stack.Screen name="settings" options={{headerShown: false}} />
+          <Stack.Screen name="username-avatar" options={{headerShown: false}} />
+          <Stack.Screen name="subscription" options={{headerShown: false}} />
           <Stack.Screen name="game-setup" options={{headerShown: false}} />
           <Stack.Screen name="rules-preview" options={{headerShown: false}} />
           <Stack.Screen name="simple-truth-or-dare" options={{headerShown: false}} />
@@ -23,6 +30,8 @@ export default function RootLayout() {
           <Stack.Screen name="result" options={{headerShown: false}} />
         </Stack>
       </GameSessionProvider>
+        </UserProfileProvider>
+        </LanguageProvider>
     </SafeAreaProvider>
     </GestureHandlerRootView>
   );

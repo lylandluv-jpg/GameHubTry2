@@ -1,0 +1,58 @@
+// Hindi UI and game strings (भाषा: हिंदी)
+
+export const hi = {
+  common: {
+    cancel: 'रद्द करें',
+    continue: 'जारी रखें',
+    back: 'वापस',
+    done: 'हो गया',
+    next: 'अगला',
+    skip: 'छोड़ें',
+    playAgain: 'फिर खेलें',
+    exit: 'बाहर निकलें',
+    exitGame: 'खेल से बाहर निकलें?',
+    exitGameMessage: 'क्या आप वाकई बाहर निकलना चाहते हैं? आपकी प्रगति मिट जाएगी।',
+  },
+  settings: {
+    title: 'सेटिंग्स',
+    unlockEverything: 'सब कुछ अनलॉक करें',
+    usernameAvatar: 'यूजरनेम और अवतार',
+    language: 'भाषा',
+    languageLabel: 'भाषा',
+    sound: 'ध्वनि',
+    underageVersion: 'नाबालिग संस्करण',
+    selectLanguage: 'भाषा',
+  },
+  language: {
+    english: 'English',
+    hindi: 'हिंदी',
+    languageNameEn: 'English',
+    languageNameHi: 'हिंदी',
+  },
+  dashboard: {
+    title: 'GameHub',
+    subtitle: 'अपना एडवेंचर चुनें',
+    joinGame: 'गेम में शामिल हों',
+    searchPlaceholder: 'मुझे गेम ढूंढने में मदद करें',
+    categoryAll: 'सभी',
+    categoryParty: 'पार्टी',
+    categorySocial: 'सामाजिक',
+    categoryIcebreaker: 'आइसब्रेकर',
+  },
+  profile: {
+    username: 'यूजरनेम',
+    usernamePlaceholder: 'अपना नाम लिखें',
+    chooseAvatar: 'अवतार चुनें',
+    save: 'सहेजें',
+  },
+  game: {
+    truth: 'सच',
+    dare: 'साहस',
+    noMoreCards: 'कोई कार्ड नहीं बचा!',
+    tapToReset: 'डेक रीसेट करने के लिए ↻ दबाएं',
+    tapTruthOrDare: 'सच या साहस चुनकर पलटें, फिर आगे बढ़ने के लिए स्वाइप करें',
+    simpleTruthOrDare: 'सरल सच या साहस',
+    gameOver: 'खेल खत्म',
+    allDone: 'सब हो गया!',
+  },
+};

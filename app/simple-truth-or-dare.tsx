@@ -21,17 +21,24 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useRouter } from 'expo-router';
 import { theme } from '../src/systems/ThemeSystem';
 import { useFadeIn } from '../src/systems/AnimationPresets';
-import { DATA, SimpleTruthOrDareCard } from '../src/games/simple-truth-or-dare/content';
+import { getData, SimpleTruthOrDareCard } from '../src/games/simple-truth-or-dare/content';
 import ExitModal from '../src/components/ExitModal';
+import { useLanguage } from '../src/systems/LanguageContext';
 
 const { width } = Dimensions.get('window');
 const SWIPE_THRESHOLD = width * 0.25;
 
 export default function SimpleTruthOrDareGame() {
   const router = useRouter();
+  const { locale, t } = useLanguage();
   const { animatedStyle: fadeStyle, animate: animateFade } = useFadeIn();
-  const [deck, setDeck] = useState<SimpleTruthOrDareCard[]>(DATA);
+  const [deck, setDeck] = useState<SimpleTruthOrDareCard[]>(() => getData(locale));
   const [showExitModal, setShowExitModal] = useState(false);
+
+  // Reload deck when language changes
+  React.useEffect(() => {
+    setDeck(getData(locale));
+  }, [locale]);
 
   useEffect(() => {
     animateFade();
@@ -55,7 +62,7 @@ export default function SimpleTruthOrDareGame() {
   };
 
   const resetDeck = () => {
-    setDeck(DATA);
+    setDeck(getData(locale));
   };
 
   return (
@@ -65,7 +72,7 @@ export default function SimpleTruthOrDareGame() {
         <Pressable onPress={handleExit} style={styles.headerButton}>
           <Text style={styles.headerButtonText}>✕</Text>
         </Pressable>
-        <Text style={styles.headerTitle}>Simple Truth or Dare</Text>
+        <Text style={styles.headerTitle}>{t('game.simpleTruthOrDare')}</Text>
         <Pressable onPress={resetDeck} style={styles.headerButton}>
           <Text style={styles.headerButtonText}>↻</Text>
         </Pressable>
@@ -75,8 +82,8 @@ export default function SimpleTruthOrDareGame() {
       <Animated.View style={[styles.cardContainer, fadeStyle]}>
         {deck.length === 0 ? (
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No more cards!</Text>
-            <Text style={styles.emptySubtext}>Tap ↻ to reset the deck</Text>
+            <Text style={styles.emptyText}>{t('game.noMoreCards')}</Text>
+            <Text style={styles.emptySubtext}>{t('game.tapToReset')}</Text>
           </View>
         ) : (
           deck
@@ -88,6 +95,7 @@ export default function SimpleTruthOrDareGame() {
                   item={item}
                   isTop={isTop}
                   onSwipe={removeTopCard}
+                  t={t}
                 />
               );
             })
@@ -98,7 +106,7 @@ export default function SimpleTruthOrDareGame() {
       {/* Instructions */}
       <View style={styles.instructions}>
         <Text style={styles.instructionText}>
-          Tap TRUTH or DARE to reveal, then swipe to continue
+          {t('game.tapTruthOrDare')}
         </Text>
       </View>
 
@@ -107,14 +115,14 @@ export default function SimpleTruthOrDareGame() {
         visible={showExitModal}
         onConfirm={confirmExit}
         onCancel={cancelExit}
-        title="Exit Game?"
-        message="Are you sure you want to exit? Your progress will be lost."
+        title={t('common.exitGame')}
+        message={t('common.exitGameMessage')}
       />
     </View>
   );
 }
 
-function Card({ item, isTop, onSwipe }: { item: SimpleTruthOrDareCard; isTop: boolean; onSwipe: () => void }) {
+function Card({ item, isTop, onSwipe, t }: { item: SimpleTruthOrDareCard; isTop: boolean; onSwipe: () => void; t: (key: string) => string }) {
   const translateX = useSharedValue(0);
   const rotateY = useSharedValue(0);
   const flipped = useSharedValue(false);
@@ -177,12 +185,12 @@ function Card({ item, isTop, onSwipe }: { item: SimpleTruthOrDareCard; isTop: bo
         <Animated.View style={[styles.absoluteFill, backStyle]}>
           <GestureDetector gesture={tapTruth}>
             <View style={[styles.half, styles.truth]}>
-              <Text style={styles.label}>TRUTH</Text>
+              <Text style={styles.label}>{t('game.truth')}</Text>
             </View>
           </GestureDetector>
           <GestureDetector gesture={tapDare}>
             <View style={[styles.half, styles.dare]}>
-              <Text style={styles.label}>DARE</Text>
+              <Text style={styles.label}>{t('game.dare')}</Text>
             </View>
           </GestureDetector>
         </Animated.View>

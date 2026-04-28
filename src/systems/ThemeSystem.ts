@@ -150,7 +150,9 @@ export const gameColors = {
   read_my_lips: '#9D36F6',
   through_the_green_glass_door: '#9D36F6',
   blabble: '#9D36F6',
-  thumbs_up_thumbs_down: '#9D36F6'
+  thumbs_up_thumbs_down: '#9D36F6',
+  impostor: '#FF5722',
+  word_wizards: '#F5A623'
 };
 
 // Mode-specific accent colors
